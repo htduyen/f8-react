@@ -7,25 +7,40 @@ function App() {
     { id: 3, name: "VueJs" },
   ];
 
-  const [checked, setChecked] = useState(2);
+  const [checked, setChecked] = useState([]);
 
-  const onChangeHandler = () => {
-    console.log({id: checked})
+  const onChangeHandler = (id) => {
+    setChecked(prev =>{
+      const isChecked = checked.includes(id)
+
+      if (isChecked){
+          return [...prev].filter(item => item !== id)
+      }
+      else{
+          return [...prev, id]
+      }
+    }
+      
+    )
+    console.log(checked)
   };
+
+  // const updateHandler = () => {
+
+  // }
   return (
     <div className="App">
       <div>
         {courses.map((course) => (
           <div key={course.id}>
             <input
-              type="radio"
-              
-              checked={checked === course.id}
-              onChange={() => setChecked(course.id)}
+              type="checkbox"
+              checked={checked.includes(course.id)} 
+              onChange={() => onChangeHandler(course.id)}
             />{course.name}
           </div>
         ))}
-        <button onClick={onChangeHandler}>Cập nhật</button>
+        <button >Cập nhật</button>
       </div>
     </div>
   );
