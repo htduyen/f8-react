@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Content from "./Content";
+import Interval from "./Interval";
 
 function App() {
   
@@ -12,7 +13,8 @@ function App() {
   return (
     <div className="App">
         <button onClick={showHandler}>Show</button>
-        { show && <Content/>}
+        {/* { show && <Content/>} */}
+        { show && <Interval/>}
     </div>
   );
 }
