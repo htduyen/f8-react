@@ -1,25 +1,34 @@
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState } from "react";
+
 
 function App() {
-	const [avatar, setAvatar] = useState();
+
+	const [count, setCount] = useState(60);
+
+	const interval = useRef();
+	const prevCount = useRef()
 
 	useEffect(() => {
-		return () => {
-			avatar && URL.revokeObjectURL(avatar.url);
-		};
-	}, [avatar]);
+		prevCount.current = count
+	}, [count]);
 
-	const choseImgHandler = (e) => {
-		const file = e.target.files[0];
-		file.url = URL.createObjectURL(file);
-		setAvatar(file);
+	const handlerStart = () => {
+		interval.current = setInterval(() => {
+			setCount(prev => prev -1)
+		}, 1000)
 	};
 
+	const handlerStop = () => {
+		clearInterval(interval.current)
+	};
+
+	console.log(prevCount.current, count);
 	return (
 		<div className="App">
-			<input type="file" onChange={choseImgHandler} />
+			<h1>{count}</h1>
+			<button onClick={handlerStart}>Start</button>
+			<button  onClick={handlerStop}>Stop</button>
 
-			{avatar && <img src={avatar.url} alt="" width="50%" />}
 		</div>
 	);
 }
