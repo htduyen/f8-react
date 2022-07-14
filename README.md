@@ -31,6 +31,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run eject`
 
+
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
@@ -68,3 +69,36 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## useRef
+
+- Ứng dụng count down + stop
+- Lưu các giá trị qua một tham chiếu bên ngoài func component
+- useRef return ==> obj {**curent**: "some_thing"}
+    
+        const timerId = useRef()
+        timerId.curent = newValue
+
+## memo
+- Có thể skip việc render khi props được truyền vào là giống nhau. **React.memo** là một higher order component. React.memo là một phương pháp được sử dụng như là một tiện ích cho việc tối ưu hoá hiệu suất ứng dụng (performance optimization).
+
+- Không render lại những component không cần thiết
+- Chỉ re-render khi props của chính nó có sự thay đổi
+
+        export default memo(TestMemo);
+        ...
+        <TestMemo/>
+        <h1>{count}</h1>
+        <button  onClick={handlerNumber}>Stop</button>
+
+## useCallback
+
+- Nếu sử dụng *useCallback* thì dùng chung *memo* cho *component con*
+- [] --> dependences
+
+        const handlerNumber = useCallback(() => {
+		setCount(prev => prev + 1);
+	}, []);
+
+

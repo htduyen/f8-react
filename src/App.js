@@ -1,4 +1,4 @@
-import {useState } from "react";
+import {useState, useCallback } from "react";
 import TestMemo from "./TestMemo";
 
 
@@ -6,16 +6,14 @@ function App() {
 
 	const [count, setCount] = useState(60);
 
-	const handlerNumber = () => {
-		setCount(count + 1);
-	};
+	const handlerNumber = useCallback(() => {
+		setCount(prev => prev + 1);
+	}, []);
 
 	return (
 		<div className="App">
-			<TestMemo/>
 			<h1>{count}</h1>
-			<button  onClick={handlerNumber}>Stop</button>
-
+			<TestMemo onBtnClicked={handlerNumber}/>
 		</div>
 	);
 }
