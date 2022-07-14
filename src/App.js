@@ -1,33 +1,20 @@
-import {useEffect, useRef, useState } from "react";
+import {useState } from "react";
+import TestMemo from "./TestMemo";
 
 
 function App() {
 
 	const [count, setCount] = useState(60);
 
-	const interval = useRef();
-	const prevCount = useRef()
-
-	useEffect(() => {
-		prevCount.current = count
-	}, [count]);
-
-	const handlerStart = () => {
-		interval.current = setInterval(() => {
-			setCount(prev => prev -1)
-		}, 1000)
+	const handlerNumber = () => {
+		setCount(count + 1);
 	};
 
-	const handlerStop = () => {
-		clearInterval(interval.current)
-	};
-
-	console.log(prevCount.current, count);
 	return (
 		<div className="App">
+			<TestMemo/>
 			<h1>{count}</h1>
-			<button onClick={handlerStart}>Start</button>
-			<button  onClick={handlerStop}>Stop</button>
+			<button  onClick={handlerNumber}>Stop</button>
 
 		</div>
 	);
