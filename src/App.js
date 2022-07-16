@@ -1,55 +1,32 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useReducer, useState} from "react";
+
+// Init value
+const initCount = 0
+
+// Actions
+const UP_ACTION = "up"
+const DOWN_ACTION = "down"
+
+const reducer = (state, action) => {
+	switch (action) {
+		case UP_ACTION:
+			return state + 1	
+		case DOWN_ACTION:
+			return state - 1
+		default:
+			break;
+	}
+}
 
 function App() {
-    const [name, setName] = useState("");
-    const nameRef = useRef();
-    const [price, setPrice] = useState('');
-    const [products, setProducts] = useState([]);
-
-    const handlerAddProduct = () => {
-        console.log(products);
-        setProducts([
-            ...products,
-            {
-                name,
-                price: +price,
-            },
-        ]);
-        setName("");
-        setPrice('');
-        nameRef.current.focus();
-    };
-    const total = useMemo(() => {
-        console.log("Tinh toan lai ....");
-        const total = products.reduce((result, product) => {
-            return result + product.price;
-        }, 0);
-        return total;
-    }, [products]);
+    const [count, dispatch] = useReducer(reducer, initCount)
 
     return (
-        <div>
-            <input
-                type="text"
-                value={name}
-				ref={nameRef}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <input
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-            />
-            <button onClick={handlerAddProduct}>Add</button>
-            <p>Total: {total}</p>
-            <ul>
-                {products.map((product, index) => (
-                    <li key={index}>
-                        Name: {product.name} - Price: {product.price}
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <p>{count}</p>
+			<button onClick={() => {dispatch(DOWN_ACTION)}}>Down</button>
+			<button onClick={() => {dispatch(UP_ACTION)}}>Up</button>
+        </>
     );
 }
 

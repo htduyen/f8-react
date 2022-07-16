@@ -115,5 +115,42 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
             return total;
         }, [products]);
 
-## 
+## useReducer
+
+        * Init state
+        * Action
+        * Reducer
+        * Dispatch
+
+1. **useReducer** thực chất là là một phiên bản nâng cao của **useState**.
+2. Trong trường hợp logic state của component trở nên lớn và phức tạp hợp thì khi đó dùng ta sẽ dùng một hàm hook là **useReducer** sẽ giúp chúng ta dễ quản lý và tổ chức state tốt hơn.
+
+        // Init value
+        const initCount = 0
+
+        // Actions
+        const UP_ACTION = "up"
+        const DOWN_ACTION = "down"
+
+        const reducer = (state, action) => {
+            switch (action) {
+                case UP_ACTION:
+                    return state + 1	
+                case DOWN_ACTION:
+                    return state - 1
+                default:
+                    break;
+            }
+        }
+
+        ...
+        const [count, dispatch] = useReducer(reducer, initCount)
+
+        return (
+           <>
+                <p>{count}</p>
+                <button onClick={() => {dispatch(DOWN_ACTION)}}>Down</button>
+                <button onClick={() => {dispatch(UP_ACTION)}}>Up</button>
+           </>
+        );
 
