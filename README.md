@@ -94,11 +94,26 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## useCallback
 
-- Nếu sử dụng *useCallback* thì dùng chung *memo* cho *component con*
+- Nếu sử dụng **useCallback** thì dùng chung **memo** cho *component con*
 - [] --> dependences
 
         const handlerNumber = useCallback(() => {
 		setCount(prev => prev + 1);
 	}, []);
 
+## useMemo
+
+1. **useMemo** tránh cho việc tính toán lại một function lặp đi lặp lại nhiều lần mỗi lần component re-render. 
+2. Bản chất **useMemo** là caching lại giá trị return của function, mỗi lần component rerender nó sẽ kiểm tra giá trị tham số truyền vào function nếu giá trị đó không thay đổi, thì return value đã caching trong memory. Ngược lại nếu giá trị tham số truyền vào thay đổi, nó sẽ thực hiện tính toán lại vào trả về value, sao đó caching lại value cho những lần rerender tiếp theo.
+3. Do App re-render nen func bi call lai  ==> Su dung useMemo de luu kq tinh toan + tinh lai neu co it nhat 1 epenps thay doi.
+
+        const total = useMemo(() => {
+            console.log("Tinh toan lai ....");
+            const total = products.reduce((result, product) => {
+                return result + product.price;
+            }, 0);
+            return total;
+        }, [products]);
+
+## 
 
