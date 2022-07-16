@@ -124,6 +124,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 1. **useReducer** thực chất là là một phiên bản nâng cao của **useState**.
 2. Trong trường hợp logic state của component trở nên lớn và phức tạp hợp thì khi đó dùng ta sẽ dùng một hàm hook là **useReducer** sẽ giúp chúng ta dễ quản lý và tổ chức state tốt hơn.
+3. Chi su dung useReducer thay useState de xu ly cases phuc tap.
 
         // Init value
         const initCount = 0
