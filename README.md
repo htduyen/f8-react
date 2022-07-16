@@ -155,3 +155,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
            </>
         );
 
+
+## useContext
+
+        * Create context
+        * Provider
+        * Cunsumer
+        
+1. CompA  -> ConpB  -> CompC
+2. Truyen data *CompA* xuong componet con *CompC* **khong** qua trung gian
+3. 
